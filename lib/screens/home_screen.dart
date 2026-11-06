@@ -1,14 +1,13 @@
-
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../core/app_theme.dart';
 import '../models/product.dart';
 import '../providers/product_provider.dart';
 import '../widgets/product_card.dart';
 import '../widgets/status_view.dart';
+import '../screens/product_details_screen.dart';
+import '../providers/cart_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -178,8 +177,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                 provider.products[index];
 
                             return ProductCard(
-                              product: product,
-                            );
+  product: product,
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute<void>(
+        builder: (context) => ProductDetailsScreen(
+          product: product,
+        ),
+      ),
+    );
+  },
+);
                           },
                         );
                       },
@@ -266,18 +275,26 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              Container(
-                padding: const EdgeInsets.all(14),
-                decoration: const BoxDecoration(
-                  color: AppTheme.lavender,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.shopping_bag_outlined,
-                  color: AppTheme.primary,
-                  size: 26,
-                ),
-              ),
+              Consumer<CartProvider>(
+  builder: (context, cart, child) {
+    return Badge(
+      isLabelVisible: cart.totalItems > 0,
+      label: Text('${cart.totalItems}'),
+      child: Container(
+        padding: const EdgeInsets.all(14),
+        decoration: const BoxDecoration(
+          color: AppTheme.lavender,
+          shape: BoxShape.circle,
+        ),
+        child: const Icon(
+          Icons.shopping_bag_outlined,
+          color: AppTheme.primary,
+          size: 26,
+        ),
+      ),
+    );
+  },
+),
             ],
           ),
 
