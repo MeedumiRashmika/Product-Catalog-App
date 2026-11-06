@@ -81,4 +81,17 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
     return true;
   }
+  
+  // Remove a product completely from the shopping cart.
+  bool removeFromCart(int productId) {
+    final removedItem = _items.remove(productId);
+
+    if (removedItem == null) {
+      return false;
+    }
+
+    notifyListeners();
+    return true;
+  }
+
 }

@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../core/app_theme.dart';
 import '../providers/cart_provider.dart';
 
@@ -61,10 +59,7 @@ class CartScreen extends StatelessWidget {
                     const Text(
                       'Start adding products you love!',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14,
-                      ),
+                      style: TextStyle(color: Colors.grey, fontSize: 14),
                     ),
 
                     const SizedBox(height: 24),
@@ -73,9 +68,7 @@ class CartScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: const Icon(
-                        Icons.shopping_bag_outlined,
-                      ),
+                      icon: const Icon(Icons.shopping_bag_outlined),
                       label: const Text('Explore Products'),
                     ),
                   ],
@@ -103,9 +96,7 @@ class CartScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(18),
                         boxShadow: [
                           BoxShadow(
-                            color: AppTheme.primary.withValues(
-                              alpha: 0.05,
-                            ),
+                            color: AppTheme.primary.withValues(alpha: 0.05),
                             blurRadius: 12,
                             offset: const Offset(0, 4),
                           ),
@@ -128,11 +119,7 @@ class CartScreen extends StatelessWidget {
                               child: Image.network(
                                 product.thumbnail,
                                 fit: BoxFit.contain,
-                                loadingBuilder: (
-                                  context,
-                                  child,
-                                  progress,
-                                ) {
+                                loadingBuilder: (context, child, progress) {
                                   if (progress == null) {
                                     return child;
                                   }
@@ -143,11 +130,7 @@ class CartScreen extends StatelessWidget {
                                     ),
                                   );
                                 },
-                                errorBuilder: (
-                                  context,
-                                  error,
-                                  stackTrace,
-                                ) {
+                                errorBuilder: (context, error, stackTrace) {
                                   return const Icon(
                                     Icons.image_not_supported_outlined,
                                     color: AppTheme.primary,
@@ -162,19 +145,50 @@ class CartScreen extends StatelessWidget {
                           // Product information
                           Expanded(
                             child: Column(
-                              crossAxisAlignment:
-                                  CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 // Product title
-                                Text(
-                                  product.title,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppTheme.textDark,
-                                  ),
+
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    // Product title
+                                    Expanded(
+                                      child: Text(
+                                        product.title,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                          color: AppTheme.textDark,
+                                        ),
+                                      ),
+                                    ),
+
+                                    // Delete button
+                                    IconButton(
+                                      tooltip: 'Remove product',
+                                      onPressed: () {
+                                        _showRemoveConfirmation(
+                                          context,
+                                          product.id,
+                                          product.title,
+                                        );
+                                      },
+                                      icon: const Icon(
+                                        Icons.delete_outline_rounded,
+                                        color: Color(0xFFDC2626),
+                                        size: 22,
+                                      ),
+                                      visualDensity: VisualDensity.compact,
+                                      constraints: const BoxConstraints(
+                                        minWidth: 36,
+                                        minHeight: 36,
+                                      ),
+                                      padding: EdgeInsets.zero,
+                                    ),
+                                  ],
                                 ),
 
                                 const SizedBox(height: 8),
@@ -204,17 +218,11 @@ class CartScreen extends StatelessWidget {
                                                   .decreaseQuantity(product.id);
                                             }
                                           : null,
-                                      icon: const Icon(
-                                        Icons.remove,
-                                        size: 18,
-                                      ),
+                                      icon: const Icon(Icons.remove, size: 18),
                                       style: IconButton.styleFrom(
-                                        backgroundColor:
-                                            AppTheme.lavender,
-                                        foregroundColor:
-                                            AppTheme.primary,
-                                        disabledForegroundColor:
-                                            Colors.grey,
+                                        backgroundColor: AppTheme.lavender,
+                                        foregroundColor: AppTheme.primary,
+                                        disabledForegroundColor: Colors.grey,
                                       ),
                                     ),
 
@@ -234,25 +242,18 @@ class CartScreen extends StatelessWidget {
 
                                     // Plus button
                                     IconButton(
-                                      onPressed:
-                                          item.quantity < product.stock
-                                              ? () {
-                                                  context
-                                                      .read<CartProvider>()
-                                                      .addToCart(product);
-                                                }
-                                              : null,
-                                      icon: const Icon(
-                                        Icons.add,
-                                        size: 18,
-                                      ),
+                                      onPressed: item.quantity < product.stock
+                                          ? () {
+                                              context
+                                                  .read<CartProvider>()
+                                                  .addToCart(product);
+                                            }
+                                          : null,
+                                      icon: const Icon(Icons.add, size: 18),
                                       style: IconButton.styleFrom(
-                                        backgroundColor:
-                                            AppTheme.lavender,
-                                        foregroundColor:
-                                            AppTheme.primary,
-                                        disabledForegroundColor:
-                                            Colors.grey,
+                                        backgroundColor: AppTheme.lavender,
+                                        foregroundColor: AppTheme.primary,
+                                        disabledForegroundColor: Colors.grey,
                                       ),
                                     ),
                                   ],
@@ -285,11 +286,7 @@ class CartScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 18, 20, 20),
                 decoration: const BoxDecoration(
                   color: Colors.white,
-                  border: Border(
-                    top: BorderSide(
-                      color: AppTheme.lavender,
-                    ),
-                  ),
+                  border: Border(top: BorderSide(color: AppTheme.lavender)),
                 ),
                 child: SafeArea(
                   top: false,
@@ -308,14 +305,11 @@ class CartScreen extends StatelessWidget {
                       const SizedBox(height: 18),
 
                       Row(
-                        mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
                             'Total Items',
-                            style: TextStyle(
-                              color: Colors.grey,
-                            ),
+                            style: TextStyle(color: Colors.grey),
                           ),
                           Text(
                             '${cart.totalItems}',
@@ -329,15 +323,12 @@ class CartScreen extends StatelessWidget {
 
                       const SizedBox(height: 14),
 
-                      const Divider(
-                        color: AppTheme.lavender,
-                      ),
+                      const Divider(color: AppTheme.lavender),
 
                       const SizedBox(height: 14),
 
                       Row(
-                        mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
                             'Total Price',
@@ -366,5 +357,33 @@ class CartScreen extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Future<void> _showRemoveConfirmation(
+    BuildContext context,
+    int productId,
+    String productTitle,
+  ) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Remove product?'),
+        content: Text('Remove "$productTitle" from your cart?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: const Text('Remove'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true && context.mounted) {
+      context.read<CartProvider>().removeFromCart(productId);
+    }
   }
 }
