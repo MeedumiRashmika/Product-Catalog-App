@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../core/app_theme.dart';
 import '../models/product.dart';
 import '../providers/cart_provider.dart';
+import 'cart_screen.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   final Product product;
@@ -31,18 +30,29 @@ class ProductDetailsScreen extends StatelessWidget {
         actions: [
           Consumer<CartProvider>(
             builder: (context, cart, child) {
-              return Padding(
-                padding: const EdgeInsets.only(right: 12),
-                child: Badge(
-                  isLabelVisible: cart.totalItems > 0,
-                  label: Text('${cart.totalItems}'),
-                  child: const Icon(
-                    Icons.shopping_bag_outlined,
-                    color: AppTheme.primary,
-                    size: 27,
-                  ),
-                ),
-              );
+             return Padding(
+  padding: const EdgeInsets.only(right: 12),
+  child: IconButton(
+    tooltip: 'Open cart',
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (_) => const CartScreen(),
+        ),
+      );
+    },
+    icon: Badge(
+      isLabelVisible: cart.totalItems > 0,
+      label: Text('${cart.totalItems}'),
+      child: const Icon(
+        Icons.shopping_bag_outlined,
+        color: AppTheme.primary,
+        size: 27,
+      ),
+    ),
+  ),
+);
             },
           ),
         ],

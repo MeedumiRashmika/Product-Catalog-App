@@ -8,7 +8,7 @@ import '../widgets/product_card.dart';
 import '../widgets/status_view.dart';
 import '../screens/product_details_screen.dart';
 import '../providers/cart_provider.dart';
-
+import 'cart_screen.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -275,21 +275,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              Consumer<CartProvider>(
+         Consumer<CartProvider>(
   builder: (context, cart, child) {
-    return Badge(
-      isLabelVisible: cart.totalItems > 0,
-      label: Text('${cart.totalItems}'),
-      child: Container(
-        padding: const EdgeInsets.all(14),
-        decoration: const BoxDecoration(
-          color: AppTheme.lavender,
-          shape: BoxShape.circle,
-        ),
-        child: const Icon(
-          Icons.shopping_bag_outlined,
-          color: AppTheme.primary,
-          size: 26,
+    return InkWell(
+      borderRadius: BorderRadius.circular(30),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute<void>(
+            builder: (_) => const CartScreen(),
+          ),
+        );
+      },
+      child: Badge(
+        isLabelVisible: cart.totalItems > 0,
+        label: Text('${cart.totalItems}'),
+        child: Container(
+          padding: const EdgeInsets.all(14),
+          decoration: const BoxDecoration(
+            color: AppTheme.lavender,
+            shape: BoxShape.circle,
+          ),
+          child: const Icon(
+            Icons.shopping_bag_outlined,
+            color: AppTheme.primary,
+            size: 26,
+          ),
         ),
       ),
     );
