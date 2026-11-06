@@ -57,6 +57,32 @@ void main() {
     expect(cart.totalItems, 0);
   });
   
+  test('Increase quantity updates cart total', () {
+    final cart = CartProvider();
+
+    cart.addToCart(product);
+
+    final result = cart.addToCart(product);
+
+    expect(result, true);
+    expect(cart.quantityFor(product.id), 2);
+    expect(cart.totalPrice, 100.0);
+  });
+
+  test('Quantity respects stock limits', () {
+    final cart = CartProvider();
+
+    cart.addToCart(product);
+
+    // Product stock is three.
+    expect(cart.addToCart(product), true);
+    expect(cart.addToCart(product), true);
+
+    // Cannot increase beyond stock.
+    expect(cart.addToCart(product), false);
+
+    expect(cart.quantityFor(product.id), 3);
+  });
 }
 
 
