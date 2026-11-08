@@ -16,8 +16,8 @@ void main() {
   );
 
   CartProvider createCart(FakeCartStorage storage) {
-    return CartProvider(storage: storage as dynamic);
-  }
+  return CartProvider(storage: storage);
+}
 
   // TEST 1: Adding a product saves the cart.
   test('Adding a product automatically saves cart', () async {

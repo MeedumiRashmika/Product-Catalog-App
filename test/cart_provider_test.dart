@@ -1,16 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:product_catalog_app/models/product.dart';
 import 'package:product_catalog_app/providers/cart_provider.dart';
-import 'package:product_catalog_app/services/cart_storage_service.dart';
 import 'helpers/fake_cart_storage.dart' as fake_cart_storage;
 
+
 Future<CartProvider> createCart() async {
-  SharedPreferences.setMockInitialValues({});
   return CartProvider(
-    storage: fake_cart_storage.FakeCartStorage() as CartStorageService,
+    storage: fake_cart_storage.FakeCartStorage(),
   );
 }
+
 
 void main() {
   final product = Product(
