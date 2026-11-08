@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import '../widgets/cart_order_summary.dart';
 import '../core/app_theme.dart';
 import '../providers/cart_provider.dart';
 
@@ -64,11 +64,11 @@ class CartScreen extends StatelessWidget {
 
               // Show order summary only when cart has items.
               if (cart.items.isNotEmpty)
-                _buildOrderSummary(
-                  productCount: cart.items.length,
-                  totalItems: cart.totalItems,
-                  subtotal: cart.totalPrice,
-                ),
+  CartOrderSummary(
+    productCount: cart.items.length,
+    totalItems: cart.totalItems,
+    subtotal: cart.totalPrice,
+  ),
             ],
           );
         },
