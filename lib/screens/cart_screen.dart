@@ -76,46 +76,7 @@ class CartScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildOrderSummary({
-    required int productCount,
-    required int totalItems,
-    required double subtotal,
-  }) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(20),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('$productCount products · $totalItems items'),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Subtotal',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                '\$${subtotal.toStringAsFixed(2)}',
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  // --------------------------------------------------
-  // EMPTY CART UI
-  // --------------------------------------------------
-
+ 
   Widget _buildEmptyCart(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
