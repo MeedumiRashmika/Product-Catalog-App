@@ -7,15 +7,32 @@ import 'providers/product_provider.dart';
 import 'providers/cart_provider.dart';
 import 'screens/home_screen.dart';
 import 'services/product_repository.dart';
+import 'services/cart_storage_service.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(const PurpleCartApp());
+  final cartStorage = CartStorageService();
+
+  final cartProvider = CartProvider(
+    storage: cartStorage,
+  );
+
+  // Load previously saved cart before displaying the app.
+  await cartProvider.loadSavedCart();
+
+  runApp(
+    PurpleCartApp(cartProvider: cartProvider),
+  );
 }
 
 class PurpleCartApp extends StatelessWidget {
-  const PurpleCartApp({super.key});
+  final CartProvider cartProvider;
+
+  const PurpleCartApp({
+    super.key,
+    required this.cartProvider,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +43,9 @@ class PurpleCartApp extends StatelessWidget {
             ProductRepository(),
           ),
         ),
-        ChangeNotifierProvider(
-          create: (_) => CartProvider(),
+
+        ChangeNotifierProvider<CartProvider>.value(
+          value: cartProvider,
         ),
       ],
       child: MaterialApp(

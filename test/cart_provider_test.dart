@@ -1,6 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../lib/models/product.dart';
 import '../lib/providers/cart_provider.dart';
+import '../lib/services/cart_storage_service.dart';
+import 'helpers/fake_cart_storage.dart' as fake_cart_storage;
+
+Future<CartProvider> createCart() async {
+  SharedPreferences.setMockInitialValues({});
+  final storage = await SharedPreferences.getInstance();
+  return CartProvider(
+    storage: fake_cart_storage.FakeCartStorage() as CartStorageService,
+  );
+}
 
 void main() {
   final product = Product(
@@ -14,8 +25,8 @@ void main() {
     images: const [],
   );
 
-  test('Adding a product increases cart quantity', () {
-    final cart = CartProvider();
+  test('Adding a product increases cart quantity', () async {
+    final cart = await createCart();
 
     cart.addToCart(product);
     cart.addToCart(product);
@@ -25,8 +36,8 @@ void main() {
     expect(cart.totalPrice, 100.0);
   });
 
-  test('Cart cannot exceed product stock', () {
-    final cart = CartProvider();
+  test('Cart cannot exceed product stock', () async {
+    final cart = await createCart();
 
     expect(cart.addToCart(product), true);
     expect(cart.addToCart(product), true);
@@ -39,7 +50,7 @@ void main() {
     expect(cart.totalPrice, 150.0);
   });
 
-  test('Out-of-stock product cannot be added', () {
+  test('Out-of-stock product cannot be added', () async {
     final outOfStockProduct = Product(
       id: 2,
       title: 'Unavailable Item',
@@ -51,14 +62,14 @@ void main() {
       images: const [],
     );
 
-    final cart = CartProvider();
+    final cart = await createCart();
 
     expect(cart.addToCart(outOfStockProduct), false);
     expect(cart.totalItems, 0);
   });
   
-  test('Increase quantity updates cart total', () {
-    final cart = CartProvider();
+  test('Increase quantity updates cart total', () async {
+    final cart = await createCart();
 
     cart.addToCart(product);
 
@@ -69,8 +80,8 @@ void main() {
     expect(cart.totalPrice, 100.0);
   });
 
-  test('Quantity respects stock limits', () {
-    final cart = CartProvider();
+  test('Quantity respects stock limits', () async {
+    final cart = await createCart();
 
     cart.addToCart(product);
 
