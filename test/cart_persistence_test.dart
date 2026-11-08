@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:product_catalog_app/models/product.dart';
-import 'package:product_catalog_app/providers/cart_provider.dart' show CartProvider;
+import 'package:nexcart/models/product.dart';
+import 'package:nexcart/providers/cart_provider.dart' show CartProvider;
 import 'helpers/fake_cart_storage.dart';
 
 void main() {

@@ -49,7 +49,7 @@ class PurpleCartApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'PurpleCart',
+        title: 'NexCart',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
         home: const HomeScreen(),

@@ -1,6 +1,6 @@
 {
-    "name": "product_catalog_app",
-    "short_name": "product_catalog_app",
+    "name": "NexCart",
+    "short_name": "NexCart",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

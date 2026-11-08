@@ -2,9 +2,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:product_catalog_app/models/cart_item.dart';
-import 'package:product_catalog_app/models/product.dart';
-import 'package:product_catalog_app/services/cart_storage_service.dart';
+import 'package:nexcart/models/cart_item.dart';
+import 'package:nexcart/models/product.dart';
+import 'package:nexcart/services/cart_storage_service.dart';
 
 class MockPreferences extends Mock implements SharedPreferencesAsync {}
 

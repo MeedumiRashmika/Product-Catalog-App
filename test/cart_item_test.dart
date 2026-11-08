@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:product_catalog_app/models/cart_item.dart';
-import 'package:product_catalog_app/models/product.dart';
+import 'package:nexcart/models/cart_item.dart';
+import 'package:nexcart/models/product.dart';
 
 void main() {
   final testProduct = Product(

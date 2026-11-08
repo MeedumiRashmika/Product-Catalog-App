@@ -1,4 +1,4 @@
-# product_catalog_app
+# NexCart
 
 A new Flutter project.
 
