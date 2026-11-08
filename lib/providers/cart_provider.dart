@@ -9,8 +9,8 @@ class CartProvider extends ChangeNotifier {
   final CartStorageService _storage;
 
   CartProvider({
-    required CartStorageService storage,
-  }) : _storage = storage;
+    required this._storage,
+  });
 
   final Map<int, CartItem> _items = {};
 
