@@ -181,10 +181,12 @@ Generate a release APK:
 flutter build apk --release
 ```
 
-The generated APK is located at:
 
-```text
-build/app/outputs/flutter-apk/app-release.apk
+## Download Debug APK
+
+Download the NexCart Android Debug APK from GitHub Releases.
+
+[Download NexCart Debug APK](https://github.com/MeedumiRashmika/Product-Catalog-App/releases/download/v1.0.0/NexCart-debug.apk)
 ```
 
 ## Screenshots
