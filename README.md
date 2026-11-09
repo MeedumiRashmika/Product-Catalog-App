@@ -189,9 +189,6 @@ Download the NexCart Android Debug APK from GitHub Releases.
 [Download NexCart Debug APK](https://github.com/MeedumiRashmika/Product-Catalog-App/releases/download/v1.0.0/NexCart-debug.apk)
 ```
 
-## Screenshots
-
-
 
 ## Author
 
